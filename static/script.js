@@ -10,7 +10,8 @@ function fetchData(url) {
 
 function updateCpuStats(data) {
     if (!data) return;
-    $("#cpu-total").text(`${data.load_average}%`);
+    $("#cpu-total").text(`${data.cpu_load_average}%`);
+    $("#cpu-name").text(`${data.cpu_product_name}`);
     const $coresContainer = $("#cpu-cores");
     $coresContainer.empty(); // Clear previous data
     data.cpu_usage.forEach((usage, index) => {

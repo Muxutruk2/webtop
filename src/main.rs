@@ -1,13 +1,14 @@
 use axum::{response::Html, response::Json, routing::get, Router};
 use humantime::format_duration;
 use serde_json::json;
+use std::fs::File;
+use std::io::{self, BufRead, BufReader};
 use std::sync::Arc;
 use sysinfo::System;
 use tokio::fs;
 use tokio::sync::Mutex;
 use tower_http::services::ServeDir;
 use tracing::{debug, error, info};
-use tracing_subscriber;
 
 #[tokio::main]
 async fn main() {
@@ -39,11 +40,30 @@ async fn main() {
     };
 
     match axum::serve(listener, app).await {
-        Ok(_) => info!("Server exited cleanly"),
+        Ok(()) => info!("Server exited cleanly"),
         Err(e) => {
             error!("Server encountered an error: {e}");
         }
     };
+}
+
+fn get_cpu_product_name() -> io::Result<String> {
+    let file = File::open("/proc/cpuinfo")?;
+    let reader = BufReader::new(file);
+
+    for line in reader.lines() {
+        let line = line?;
+        if line.starts_with("model name") {
+            if let Some(name) = line.split(':').nth(1) {
+                return Ok(name.trim().to_string());
+            }
+        }
+    }
+
+    Err(io::Error::new(
+        io::ErrorKind::NotFound,
+        "CPU model name not found",
+    ))
 }
 
 async fn root_handler() -> Result<Html<String>, axum::http::StatusCode> {
@@ -66,16 +86,22 @@ async fn cpu_handler(state: axum::extract::State<Arc<Mutex<System>>>) -> Json<se
         .iter()
         .map(sysinfo::Cpu::cpu_usage)
         .collect::<Vec<_>>();
+    drop(sys);
+
     let load_average = System::load_average().one;
 
+    let product_name =
+        get_cpu_product_name().unwrap_or_else(|_| "Could not get CPU Product Name".to_string());
+
     info!(
-        "CPU stats retrieved: usage={:?}, load_average={}",
-        cpu_usage, load_average
+        "CPU stats retrieved: cpu_usage={:?}, cpu_load_average={}, cpu_product_name={}",
+        cpu_usage, load_average, product_name
     );
 
     Json(json!({
         "cpu_usage": cpu_usage,
-        "load_average": load_average,
+        "cpu_load_average": load_average,
+        "cpu_product_name": product_name,
     }))
 }
 
@@ -157,6 +183,7 @@ async fn proc_handler(state: axum::extract::State<Arc<Mutex<System>>>) -> Json<s
             })
         })
         .collect::<Vec<_>>();
+    drop(sys);
 
     info!(
         "Processes stats retrieved: {} processes",
