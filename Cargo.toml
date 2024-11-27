@@ -1,0 +1,15 @@
+[package]
+name = "webtop"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = "0.7.9"
+humantime = "2.1.0"
+serde_json = "1.0.133"
+sysinfo = "0.32.0"
+time = "0.3.36"
+tokio = { version = "1.41.1", features = ["full"] }
+tower-http = { version = "0.6.2", features = ["fs"] }
+tracing = "0.1.41"
+tracing-subscriber = "0.3.18"

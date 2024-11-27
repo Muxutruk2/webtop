@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Monitor</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/script.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <div class="main-content">
+        <h1>System Monitor</h1>
+        <div class="horizontal-stats">
+            <section id="cpu-section">
+                <h2>CPU</h2>
+                <div class="stats" id="cpu-stats">
+                    <div class="stat-item">
+                        <span class="stat-label accent">Load Average:</span>
+                        <span class="stat-value accent" id="cpu-total">Loading...</span>
+                    </div>
+                    <div id="cpu-cores">
+                        <!-- Core-specific stats will be inserted here -->
+                    </div>
+                </div>
+            </section>
+
+            <section id="mem-section">
+                <h2>Memory</h2>
+                <div class="stats" id="memory-stats">
+                    <div class="stat-item">
+                        <span class="stat-label accent">Memory Usage:</span>
+                        <span class="accent stat-value" id="memory-percent">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Memory:</span>
+                        <span class="stat-value" id="memory-total">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Used Memory:</span>
+                        <span class="stat-value" id="memory-used">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Free Memory:</span>
+                        <span class="stat-value" id="memory-free">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Available Memory:</span>
+                        <span class="stat-value" id="memory-available">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Swap:</span>
+                        <span class="stat-value" id="memory-swap-total">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Used Swap:</span>
+                        <span class="stat-value" id="memory-swap-used">Loading...</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sys-section">
+                <h2>System Info</h2>
+                <div class="stats" id="system-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Name:</span>
+                        <span class="stat-value" id="sys-name">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Kernel Version:</span>
+                        <span class="stat-value" id="sys-kernel">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">OS Version:</span>
+                        <span class="stat-value" id="sys-os">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Long OS Version:</span>
+                        <span class="stat-value" id="sys-long-os">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Distribution ID:</span>
+                        <span class="stat-value" id="sys-dist">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Uptime</span>
+                        <span class="stat-value" id="sys-uptime">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Host Name:</span>
+                        <span class="stat-value" id="sys-host">Loading...</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="networks-section">
+                <h2>Networks</h2>
+                <div class="stats" id="network-stats">
+                    <!-- Network interfaces will be dynamically inserted here -->
+                </div>
+            </section>
+        </div>
+        <div id="process-table-container">
+            <table id="process-table">
+                <thead>
+                    <tr>
+                        <th>PID</th>
+                        <th>Name</th>
+                        <th>CPU Usage (%)</th>
+                        <th>Memory (MiB)</th>
+                        <th>Virtual Memory (MiB)</th>
+                        <th>Status</th>
+                        <th>Run Time (s)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
