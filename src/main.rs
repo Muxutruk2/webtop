@@ -103,6 +103,7 @@ async fn memory_handler(
     }))
 }
 
+#[allow(clippy::cast_possible_wrap)]
 async fn system_handler() -> Json<serde_json::Value> {
     debug!("Handling system stats request");
     let system_info = json!({
