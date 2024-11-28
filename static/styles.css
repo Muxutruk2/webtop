@@ -43,7 +43,6 @@ color: var(--accent-bright);
     display: flex;
     flex-direction: column;
     padding: var(--padding-small);
-    width: 100%;
     gap: var(--gap);
 }
 
@@ -62,7 +61,6 @@ color: var(--accent-bright);
 
 section {
     min-width: 20%;
-    flex-grow: 1;
     padding: var(--padding-medium);
     background-color: var(--bg-medium);
     border-radius: var(--border-radius-big);
