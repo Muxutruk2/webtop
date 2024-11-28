@@ -4,7 +4,7 @@ Webtop
 
 This is a rust webserver powered by Axum that shows the system's information and its resources.
 
-![Preview](https://imgur.com/a/CFtEPtX)
+![Preview](https://imgur.com/ZODGxOl)
 
 ## Features
 - Memory: Availabe, usage, swap...
