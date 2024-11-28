@@ -73,10 +73,18 @@ function refreshData() {
     // Uncomment if needed
         fetchData('/proc').done(updateProcStats);
 }
+let currentSortColumn = null;
+let currentSortOrder = "asc"; // "asc" for ascending, "desc" for descending
+
 function updateProcStats(processes) {
     processes = processes.processes;
     if (!processes || !Array.isArray(processes)) return;
-    // processes = processes.processes;
+
+    // Apply sorting if a column is selected
+    if (currentSortColumn) {
+        processes = sortProcesses(processes, currentSortColumn, currentSortOrder);
+    }
+
     const $tableBody = $("#process-table tbody");
     $tableBody.empty(); // Clear existing rows
 
@@ -94,9 +102,42 @@ function updateProcStats(processes) {
         `;
         $tableBody.append(rowHtml);
     });
-
 }
 
-// Set interval and initial load
-setInterval(refreshData, 1000); // Replace with a reasonable interval (e.g., 10000 for 10 seconds)
-refreshData();
+function sortProcesses(processes, column, order = "asc") {
+    return processes.sort((a, b) => {
+        const valueA = a[column];
+        const valueB = b[column];
+
+        if (typeof valueA === "string") {
+            return order === "asc"
+                ? valueA.localeCompare(valueB)
+                : valueB.localeCompare(valueA);
+        } else {
+            return order === "asc" ? valueA - valueB : valueB - valueA;
+        }
+    });
+}
+
+function attachSortingHandler() {
+    $("#process-table thead th[data-sortable='true']").on("click", function () {
+        const column = $(this).data("column");
+        const newSortOrder = currentSortColumn === column && currentSortOrder === "asc" ? "desc" : "asc";
+
+        currentSortColumn = column;
+        currentSortOrder = newSortOrder;
+
+        // Fetch current processes and sort
+        $.getJSON("/proc", (response) => {
+            if (response && response.processes) {
+                updateProcStats({ processes: response.processes });
+            }
+        });
+    });
+}
+
+$(document).ready(() => {
+    setInterval(refreshData, 1000);
+    refreshData();
+    attachSortingHandler();
+})
