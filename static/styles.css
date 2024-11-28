@@ -19,6 +19,7 @@
 }
 
 body {
+    font-family: Ubuntu, sans-serif;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -42,7 +43,6 @@ color: var(--accent-bright);
     display: flex;
     flex-direction: column;
     padding: var(--padding-small);
-    width: 100%;
     gap: var(--gap);
 }
 
@@ -61,7 +61,6 @@ color: var(--accent-bright);
 
 section {
     min-width: 20%;
-    flex-grow: 1;
     padding: var(--padding-medium);
     background-color: var(--bg-medium);
     border-radius: var(--border-radius-big);
@@ -113,7 +112,6 @@ section > * {
     max-width: 100%;
     border-collapse: collapse;
     text-align: left;
-    font-family: Arial, sans-serif;
     color: var(--fg-light);
 }
 
