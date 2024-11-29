@@ -95,7 +95,6 @@ function updateProcStats(processes) {
                 <td>${process.name}</td>
                 <td>${(process.cpu_usage * 100).toFixed(2)}</td>
                 <td>${(process.memory / 1_024_000).toFixed(2)}</td>
-                <td>${(process.virtual_memory / 1_024_000).toFixed(2)}</td>
                 <td>${process.status}</td>
                 <td>${process.run_time}</td>
             </tr>

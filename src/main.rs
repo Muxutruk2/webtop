@@ -176,7 +176,6 @@ async fn proc_handler(state: axum::extract::State<Arc<Mutex<System>>>) -> Json<s
                 "pid": *pid.to_string(),
                 "name": process.name().to_string_lossy(),
                 "memory": process.memory(),
-                "virtual_memory": process.virtual_memory(),
                 "cpu_usage": process.cpu_usage(),
                 "run_time": process.run_time(),
                 "status": format!("{:?}", process.status())
