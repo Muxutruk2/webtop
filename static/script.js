@@ -121,17 +121,32 @@ function sortProcesses(processes, column, order = "asc") {
 function attachSortingHandler() {
     $("#process-table thead th[data-sortable='true']").on("click", function () {
         const column = $(this).data("column");
+        const columnIndex = $(this).index();
         const newSortOrder = currentSortColumn === column && currentSortOrder === "asc" ? "desc" : "asc";
 
         currentSortColumn = column;
         currentSortOrder = newSortOrder;
 
-        // Fetch current processes and sort
-        $.getJSON("/proc", (response) => {
-            if (response && response.processes) {
-                updateProcStats({ processes: response.processes });
+        const $rows = $("#process-table tbody tr").toArray();
+        const isNumeric = $(this).data("type") === "numeric";
+
+        $rows.sort((a, b) => {
+            const valueA = $(a).find(`td:eq(${columnIndex})`).text().trim();
+            const valueB = $(b).find(`td:eq(${columnIndex})`).text().trim();
+
+            const parsedA = isNumeric ? parseFloat(valueA) || 0 : valueA;
+            const parsedB = isNumeric ? parseFloat(valueB) || 0 : valueB;
+
+            if (typeof parsedA === "string") {
+                return currentSortOrder === "asc"
+                    ? parsedA.localeCompare(parsedB)
+                    : parsedB.localeCompare(parsedA);
+            } else {
+                return currentSortOrder === "asc" ? parsedA - parsedB : parsedB - parsedA;
             }
         });
+
+        $("#process-table tbody").empty().append($rows);
     });
 }
 
