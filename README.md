@@ -9,6 +9,7 @@ This is a rust webserver powered by Axum that shows the system's information and
 ## Features
 - Memory: Availabe, usage, swap...
 - CPU: Cores, usage, load, name
+- GPU: Name, memory and temperature
 - System: Name, kernel, OS, up time
 - Networks: interface, received and transmitted
 - Processes: PID, name, CPU/RAM Usage, virtual memory, status and run time
