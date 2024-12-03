@@ -128,18 +128,17 @@ section > * {
     border-radius: var(--border-radius-small);
 }
 
+#process-table th:hover{
+    cursor: pointer;
+    background-color: var(--bg-light);
+}
+
 #process-table tbody tr:nth-child(odd) {
     background-color: var(--bg-light);
 }
 
 #process-table tbody tr:nth-child(even) {
     background-color: var(--bg-medium);
-}
-
-#process-table tbody tr:hover {
-    background-color: var(--bg-light);
-    color: var(--accent-bright);
-    cursor: pointer;
 }
 
 #process-table td {
