@@ -1,20 +1,16 @@
 Webtop
 ======
-[![GitHub Stars](https://img.shields.io/github/stars/Muxutruk2/webtop.svg)](https://github.com/Muxutruk2/webtop/stargazers) [![GitHub Issues](https://img.shields.io/github/issues/Muxutruk2/webtop.svg)](https://github.com/Muxutruk2/webtop/issues) 
-
-This is a rust webserver powered by Axum that shows the system's information and its resources.
+A lightweight, Rust-powered web server for real-time system monitoring.
 
 ![Preview](https://i.imgur.com/ZODGxOl.png)
 
 ## Features
-- Memory: Availabe, usage, swap...
-- CPU: Cores, usage, load, name
-- GPU: Name, memory and temperature
-- System: Name, kernel, OS, up time
-- Networks: interface, received and transmitted
-- Processes: PID, name, CPU/RAM Usage, virtual memory, status and run time
-
----
+- **Memory**: Available, usage, and swap statistics.
+- **CPU**: Core count, usage percentage, load averages, and processor name.
+- **GPU**: Graphics card name, memory usage, and temperature.
+- **System**: Hostname, kernel version, operating system, and uptime.
+- **Networks**: Active interfaces with received and transmitted data stats.
+- **Processes**: Details like PID, name, CPU/RAM usage, virtual memory, status, and runtime.---
 
 ## Setup
 
@@ -28,6 +24,6 @@ After you clone this repo to your desktop, go to its root directory and run `car
 ---
 
 ## License
->You can check out the full license [here](https://github.com/Muxutruk2/webtop/blob/master/LICENSE)
 
-This project is licensed under the terms of the **MIT** license.
+This project is licensed under the terms of the **MIT License**.  
+See the full license [here](https://github.com/Muxutruk2/webtop/blob/master/LICENSE).
