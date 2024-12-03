@@ -64,14 +64,28 @@ function updateNetworkStats(data) {
     });
 }
 
+function updateGpuStats(data){
+    if (!data) return;
+    const gpus = data.gpus;
+    const $gpusContainer = $("#gpu-stats");
+    $gpusContainer.empty();
+    gpus.forEach((gpu) => {
+        const gpuDiv = `
+                    <div class="stat-item">
+                        ${gpu.name} ${(gpu.memory / 1_024_000 ).toFixed(0)} GiB ${gpu.temperature} ºC
+                    </div>
+        `;
+        $gpusContainer.append(gpuDiv)
+    })
+}
+
 function refreshData() {
     fetchData('/cpu').done(updateCpuStats);
     fetchData('/mem').done(updateMemoryStats);
     fetchData('/system').done(updateSystemStats);
     fetchData('/networks').done(updateNetworkStats);
-
-    // Uncomment if needed
-        fetchData('/proc').done(updateProcStats);
+    fetchData('/proc').done(updateProcStats);
+    fetchData('/gpu').done(updateGpuStats);
 }
 let currentSortColumn = null;
 let currentSortOrder = "asc"; // "asc" for ascending, "desc" for descending
@@ -149,6 +163,19 @@ function attachSortingHandler() {
         $("#process-table tbody").empty().append($rows);
     });
 }
+
+function formatBytes(bytes) {
+    if (bytes >= 1073741824) { // 1 GB = 1073741824 bytes
+        return (bytes / 1073741824).toFixed(0) + "GB";
+    } else if (bytes >= 1048576) { // 1 MB = 1048576 bytes
+        return (bytes / 1048576).toFixed(0) + "MB";
+    } else if (bytes >= 1024) { // 1 KB = 1024 bytes
+        return (bytes / 1024).toFixed(0) + "KB";
+    } else {
+        return bytes + "B";
+    }
+}
+
 
 $(document).ready(() => {
     setInterval(refreshData, 1000);

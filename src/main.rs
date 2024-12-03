@@ -1,5 +1,6 @@
 use axum::{response::Html, response::Json, routing::get, Router};
 use humantime::format_duration;
+use machine_info::Machine;
 use serde_json::json;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
@@ -23,6 +24,7 @@ async fn main() {
         .route("/system", get(system_handler))
         .route("/networks", get(network_handler))
         .route("/proc", get(proc_handler))
+        .route("/gpu", get(gpu_handler))
         .nest_service("/static", ServeDir::new("static"))
         .with_state(shared_system.clone());
 
@@ -102,6 +104,14 @@ async fn cpu_handler(state: axum::extract::State<Arc<Mutex<System>>>) -> Json<se
         "cpu_usage": cpu_usage,
         "cpu_load_average": load_average,
         "cpu_product_name": product_name,
+    }))
+}
+
+async fn gpu_handler() -> Json<serde_json::Value> {
+    debug!("Handling gpu stats request");
+    let m = Machine::new().system_info();
+    Json(json!({
+        "gpus": m.graphics,
     }))
 }
 
