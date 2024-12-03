@@ -1,0 +1,19 @@
+[target.'cfg(all())']
+rustflags = [
+    
+    "-Wclippy::single_match",
+    "-Wclippy::single_match_else",
+    "-Wclippy::needless_match",
+    "-Wclippy::needless_late_init",
+    "-Wclippy::redundant_pattern_matching",
+    "-Wclippy::redundant_pattern",
+    "-Wclippy::redundant_guards",
+    "-Wclippy::collapsible_match",
+    "-Wclippy::match_single_binding",
+    "-Wclippy::match_same_arms",
+    "-Wclippy::match_ref_pats",
+    "-Wclippy::match_bool",
+    "-Dclippy::needless_bool",
+    "-Wclippy::unwrap_used",
+    "-Wclippy::expect_used",
+    ]
