@@ -1,4 +1,4 @@
-use sysinfo::{Components, Cpu, Disks, Networks, System};
+use sysinfo::{System};
 pub struct CPUInfo {
     pub model_name: Option<String>,
 }
@@ -6,7 +6,7 @@ pub struct CPUInfo {
 impl CPUInfo {
     pub fn new() -> Self {
         let mut sys = System::new_all();
-        let _ = sys.refresh_all();
+        sys.refresh_all();
         let name = sys.cpus().first().map(|cpu| cpu.brand().to_string());
         CPUInfo { model_name: name }
     }
