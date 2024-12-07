@@ -2,14 +2,16 @@ use axum::{response::Html, response::Json, routing::get, Router};
 use humantime::format_duration;
 use machine_info::Machine;
 use serde_json::json;
-use std::fs::File;
-use std::io::{self, BufRead, BufReader};
+// use std::fs::File;
+use std::io::{self};
 use std::sync::Arc;
 use sysinfo::System;
 use tokio::fs;
 use tokio::sync::Mutex;
 use tower_http::services::ServeDir;
 use tracing::{debug, error, info};
+mod cpu;
+use cpu::CPUInfo;
 
 #[tokio::main]
 async fn main() {
@@ -48,24 +50,16 @@ async fn main() {
         }
     };
 }
-
 fn get_cpu_product_name() -> io::Result<String> {
-    let file = File::open("/proc/cpuinfo")?;
-    let reader = BufReader::new(file);
+    let cpu_info = CPUInfo::new();
 
-    for line in reader.lines() {
-        let line = line?;
-        if line.starts_with("model name") {
-            if let Some(name) = line.split(':').nth(1) {
-                return Ok(name.trim().to_string());
-            }
-        }
+    match cpu_info.get_brand_name() {
+        Some(name) => Ok(name),
+        None => Err(io::Error::new(
+            io::ErrorKind::NotFound,
+            "CPU model name not found",
+        )),
     }
-
-    Err(io::Error::new(
-        io::ErrorKind::NotFound,
-        "CPU model name not found",
-    ))
 }
 
 async fn root_handler() -> Result<Html<String>, axum::http::StatusCode> {
