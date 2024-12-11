@@ -1,10 +1,11 @@
-Webtop
-======
+# Webtop
+
 A lightweight, Rust-powered web server for real-time system monitoring.
 
 ![Preview](https://i.imgur.com/ZODGxOl.png)
 
 ## Features
+
 - **Memory**: Available, usage, and swap statistics.
 - **CPU**: Core count, usage percentage, load averages, and processor name.
 - **GPU**: Graphics card name, memory usage, and temperature.
@@ -14,51 +15,53 @@ A lightweight, Rust-powered web server for real-time system monitoring.
 
 ## Setup
 
-Make sure you have a valid OS installed (not windows) and rust.
+Make sure Rust is installed. A Linux OS is preffered.
 
 ---
 
 ## Usage
+
 After you clone this repo to your desktop, go to its root directory and run `cargo run` to run the server. The default port is 3000
 
 ---
 
 ## Contributing
 
-We welcome contributions of all kinds, from bug fixes to new features!  
+We welcome contributions of all kinds, from bug fixes to new features!
 
 ### Steps to Contribute
 
-1. **Fork the Repository**  
+1. **Fork the Repository**
 
    ```bash
    git clone https://github.com/Muxutruk2/webtop.git
    cd webtop
    ```
 
-2. **Create a Branch**  
+2. **Create a Branch**
 
-Use a descriptive name for your branch:  
+Use a descriptive name for your branch:
+
 ```bash
 git checkout -b feature/your-feature-name
 ```
 
 3. **Make Changes**  
-Implement your changes and ensure they align with Rust best practices.  
+   Implement your changes and ensure they align with Rust best practices.
 
-4. **Test Your Changes**  
+4. **Test Your Changes**
 
 Ensure all functionality is working and the code is ready to merge by using `cargo clippy`
 
 5. **Submit a Pull Request (PR)**  
-Push your branch and open a PR to the main repository. Clearly describe your changes and link any related issues.  
+   Push your branch and open a PR to the main repository. Clearly describe your changes and link any related issues.
 
 ---
 
 ### Contribution Guidelines
 
-- Write clear, concise commit messages.  
-- Update documentation if your changes affect usage.  
+- Write clear, concise commit messages.
+- Update documentation if your changes affect usage.
 - Be respectful and constructive in discussions.
 
 ---
