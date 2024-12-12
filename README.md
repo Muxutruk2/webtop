@@ -13,6 +13,15 @@ A lightweight, Rust-powered web server for real-time system monitoring.
 - **Networks**: Active interfaces with received and transmitted data stats.
 - **Processes**: Details like PID, name, CPU/RAM usage, virtual memory, status, and runtime.---
 
+## Development Checklist
+
+- [ ] RAM Information (DDR4...)
+- [ ] Process Sorting and Filters
+- [ ] Various colorschemes
+- [ ] Make the sorting fast
+- [ ] Configurable server
+- [ ] Only refresh data that may change
+
 ## Setup
 
 Make sure Rust is installed. A Linux OS is preffered.
